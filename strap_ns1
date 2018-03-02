@@ -1,0 +1,39 @@
+#!/bin/bash 
+set -x 
+yum -y install bind bind-utils 
+sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+
+cp -f /vagrant/dhclient.conf_ns1 /etc/dhcp/dhclient.conf
+cp -f /vagrant/named.conf  /etc
+cp -f /vagrant/forward.bitfocus.local  /var/named
+cp -f /vagrant/reverse.bitfocus.local  /var/named
+
+systemctl start firewalld
+firewall-cmd --permanent --add-port=53/tcp 
+firewall-cmd --permanent --add-port=53/udp 
+firewall-cmd --reload
+#
+chgrp named -R /var/named
+chown -v root:named /etc/named.conf
+restorecon -rv /var/named
+restorecon /etc/named.conf
+
+
+
+
+named-checkzone bitfocus.local /var/named/forward.bitfocus.local
+named-checkzone bitfocus.local /var/named/reverse.bitfocus.local
+
+systemctl restart network
+
+ddns-confgen -r /dev/urandom -z bitfocus.local |grep -i algorithm -A 2 -B1 > /vagrant/ddns-key.txt
+cp -f /vagrant/ddns-key.txt /etc/
+chmod 644 /etc/ddns-key.txt
+setenforce 0
+sed -i 's/SELINUX=\(enforcing\|permissive\)/SELINUX=disabled/g' /etc/selinux/config
+
+
+chown -R named:named /var/named
+
+systemctl enable named
+systemctl start named

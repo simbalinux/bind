@@ -1,0 +1,6 @@
+server ns1.bitfocus.local
+debug yes
+zone bitfocus.local 
+update add test.bitfocus.local 3600 A 172.31.1.99 
+show
+send

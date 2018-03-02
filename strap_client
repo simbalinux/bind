@@ -1,0 +1,7 @@
+yum -y install bind-utils
+#client can only read the slave DNS server not Master, if replication is broken slave will not update.
+cp -f /vagrant/dhclient.conf_client /etc/dhcp/dhclient.conf
+
+systemctl restart network
+
+

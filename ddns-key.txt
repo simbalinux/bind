@@ -1,0 +1,4 @@
+key "ddns-key.bitfocus.local" {
+	algorithm hmac-sha256;
+	secret "4uZxi1OmmawHqRJaji+SHu+FjumP0JYTGU2s2x2WNEU=";
+};
