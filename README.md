@@ -372,7 +372,10 @@ search bitfocus.local
 nameserver 172.31.1.
 ```
 ### Final conclusion:
-To update ZONE files simply ssh > SLAVE NS2, from there edit the update_ns1.txt file to you're liking. Then issue a "nsupdate -k ddns-key.txt -v
+ssh > SLAVE NS2
+update_ns1.txt file to you're liking
+Then issue a "nsupdate -k ddns-key.txt -v
+
 update_ns1.txt" and NS1/Master will be updated and the serial will be automatically updated and all HOSTS in the network will have updated
 ZONE files for DNS.
 
