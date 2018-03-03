@@ -364,6 +364,7 @@ supersede domain-name-servers 172.31.1.21, 8.8.8.8;
 Finally ensure that the client can see the MASTERS dynamically updated RR using our SLAVE query.
 
 ```
+```
 [vagrant@client ~]$ dig +short test.bitfocus.local && cat
 /etc/resolv.conf
 172.31.1.
