@@ -2,7 +2,7 @@
 
 This project can be automatically deployed using "git clone" and "vagrant up" at the following repo URL:
 
-https://bitbucket.org/bit-ops/dns/src
+
 
 ## Setup
 
